@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<string.h>
+#define MAXN 100
+int main()
+{
+	int n,arr[MAXN],brr[MAXN];
+	int kase = 0;
+	while(scanf("%d",&n)==1&& n){//全是输入数字当然是scanf%d！！！ 
+		printf("Game %d:\n",++kase);
+		for(int i=0;i<n;i++)scanf("%d",&arr[i]);
+	for(;;)
+	{
+		int a=0,b=0; 
+			for(int i=0;i<n;i++){//输入猜测序列 
+			scanf("%d",&brr[i]);  
+			if(arr[i] == brr[i])a++;
+		}
+		if(brr[0] == 0)break;
+		for(int i=1;i<=9;i++){
+			int c1=0,c2=0;
+			for(int k =0;k<n;k++){
+				if(arr[k] == i)c1++;
+				if(brr[k] == i)c2++;
+			}
+			if(c1>=c2)b += c2;//此处不能忽略c1 = c2的情况，此情况下，b=0，a！=0 
+			if(c2>c1)b += c1;
+		}
+		printf("(%d,%d)\n",a,b-a);
+	}
+}}

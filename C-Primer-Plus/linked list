@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define SIZE 45
+struct node{
+	char word[SIZE];
+	int num;
+	struct node *next;
+}; 
+int main()
+{
+	struct node *head = NULL;
+	struct node *prev,*curr;
+	char input[SIZE];
+	puts("Enter first word:");
+	while(gets(input) != NULL && input[0] != '\0'){
+		curr = (struct node*)malloc(sizeof(struct node));
+		if(head == NULL){
+			head = curr;
+		}
+		else{
+			prev->next = curr;
+		}
+		curr->next = NULL;
+		strcpy(curr->word,input);
+		puts("enter your num form <0~10>: ");
+		scanf("%d",&curr->num);
+		while(getchar() != '\n'){
+			continue;
+		}
+		puts("enter your next word:1");
+		prev = curr;
+	}
+	if(head == NULL){printf("no data enterd.");
+	}else{printf("here is the word list:\n");
+	}
+	curr = head;
+	while(curr != NULL){
+		printf("word %s num %d\n",curr->word,curr->num);
+		curr = curr->next;
+	}
+	curr = head;
+	while(curr != NULL){
+		free(curr);
+		curr = curr->next;
+	}
+	printf("Bye!\n");
+	return 0;
+}

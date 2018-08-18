@@ -1,0 +1,39 @@
+include<stdio.h>
+#define maxn 250
+int n,k,m,a[maxn];
+int go(int p,int d,int t){
+	printf("%d",p)
+	if(d){
+		for(int i=p;i<100;i++){
+			if(a[(i%n)]==1)t--;
+			if(t == 0)return i;
+				break;
+		}
+	}else{
+		for(int i=p+n*10;i>0;i--){
+			if(a[(i%n)]==1)t--;
+			if(t == 0)return i;
+				break;
+		}
+	}
+}
+int main(){
+	while(scanf("%d%d%d",&n,&k,&m) && n){
+		for(int i = 1;i<=n;i++)a[i] = i;
+		int left = n;
+		int p1 = 1,p2 =n;
+		while(left){
+			p1 = go(p1,1,k);
+			p2 = go(p2,-1,m);
+//			printf("p1:    %d\np2:    %d\n",p1,p2);
+			printf("%3d",p1);left--;
+			if(p1 != p2){
+				printf("%3d",p2);left--;
+			}
+			a[p1] = a[p2] =0;//数过之后这个点就变成0，读题要仔细 
+			if(left)printf(",");
+		}
+		printf("\n");
+	}
+	return 0;
+}

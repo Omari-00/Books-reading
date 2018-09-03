@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<string.h>
+#define test
+int main(){
+	int i,c,num = 0,nsum =0 ;
+	int arr[100];//int 数组不能用strlen求，只能求字符串 
+	memset(arr,0,sizeof(arr));
+	while((c = getchar()) != EOF){
+		++nsum;
+		if(c >= 'a' && c <= 'z'){
+			num++;
+		}else{
+			++arr[num];
+			num = 0;
+		}
+	}
+	printf("the total number of words is %d\n",nsum);
+	for(int i=1;i<=15;i++){
+		if(arr[i]){
+			printf("word length:%d\t",i);
+			for(int j=1;j<=arr[i];j++){
+				printf("*");
+			}
+			printf("\n");
+		}
+	}
+	return 0;
+}

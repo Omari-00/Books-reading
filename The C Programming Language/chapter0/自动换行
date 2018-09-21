@@ -1,0 +1,76 @@
+#include<stdio.h>
+//#define test
+
+void test_comment(int c); 
+void delt_comment(void);
+void next_line(void);
+void echo_quote(int c);
+
+/* 删除的方法只要录入后不putchar即可 */ 
+
+int main(){
+	int c;
+	
+	while((c = getchar()) != EOF){
+		test_comment(c);
+	}
+	return 0;
+}
+
+/*有几种情况：
+	* /*然后用delt找结尾的* / 
+	* //用nextline删掉这一行所有内容
+	* 注意字符串or字符的特殊情况 
+	
+*/ 
+void test_comment(int c){
+	int d;
+	if(c == '/'){
+		if((d = getchar()) == '*'){
+			delt_comment();
+		}else if(d == '/'){
+			next_line();
+		}else{
+			putchar(c);
+			putchar(d);
+		}
+	}else{
+		if(c == '\'' || c == '"'){
+			echo_quote(c);
+		}else{
+			putchar(c);
+		}
+	}
+} 
+
+void delt_comment(void){
+	int c,d;
+	c = getchar();
+	d = getchar();
+	while(c != '*' || d != '/'){
+		c = d;
+		d = getchar();
+	}
+}
+
+void next_line(void){
+	int c;
+	c = getchar();
+	while(c != '\n'){
+		c = getchar();
+	}
+}
+ 
+void echo_quote(int c){
+	int d;
+	
+	putchar(c);
+	while((d = getchar()) != c){
+		putchar(d);
+		#ifdef test
+		if(d == '\\')
+			putchar(getchar());
+		#endif
+	}
+	putchar(d);
+}

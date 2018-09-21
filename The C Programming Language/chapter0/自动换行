@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<string.h>
+#define maxline 100
+#define len 10
+#define test
+
+int kase = 1;\
+
+char line[maxline];
+int prtline(int pos);
+int ifend(char c);
+
+int main(){
+	
+	int c;
+	int num;
+	int pos;
+	pos = num = 0;
+//	memset(line,0,sizeof(line));//memset不可给字符数组赋值 
+	
+	while((c = getchar()) != EOF && num < maxline){
+		line[num++] = c;
+	}
+	while(kase){//若最后一行，则返回pos = pos+len，最后一个字符 
+		pos = prtline(pos);
+	}
+	return 0;
+}
+
+int prtline(int pos){
+	int pos2;//标记pos位置 
+	if(!ifend(line[pos+len-1])){
+		for(int i = pos+len-1;i>=pos;i--){//找到pos2 
+			if(line[i] == ' '){
+				pos2 = i;
+				break;
+			}
+		}
+		for(int i = pos;i<=pos2;i++){//打印pos到 pos2 
+			printf("%c",line[i]);
+		}
+		printf("\n");
+		return pos2+1;		
+	}else{
+		for(int i=pos;i<pos+len;i++){
+			if(!ifend(line[i])){
+				printf("%c",line[i]);
+			}else{
+				kase = 0;
+				return i;
+			}
+		}
+	}
+}
+
+//ifend end == 1，！end == 0 
+int ifend(char c){
+	if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' '){
+		return 0;
+	}else{
+		return 1;
+	}
+}
